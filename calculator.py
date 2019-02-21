@@ -1,24 +1,28 @@
 #!/usr/bin/env python3
 import sys
 
-salary = sys.argv[1]
-tax = 0
-try:
-    ex_salary = int(salary) - 5000
-    if ex_salary <3000:
-        tax = ex_salary * 0.03
-    elif ex_salary < 12000:
-        tax = (ex_salary-3000) * 0.10 + 3000*0.03
-    elif ex_salary < 25000:
-        tax = (ex_salary-12000) * 0.20 + 3000*0.03 + 9000*0.1
-    elif ex_salary < 35000:
-        tax = (ex_salary-25000) * 0.25 + 3000*0.03 + 9000*0.1 + 13000*0.2
-    elif ex_salary < 55000:
-        tax = (ex_salary-35000) * 0.35 + 3000*0.03 + 9000*0.1 + 130000*0.2 +10000*0.25 
-    elif ex_salary <80000:
-        tax = (ex_salary-55000) * 0.45 + 3000*0.03 + 9000*0.1 + 13000*0.2 + 10000*0.25 + 20000*0.35
-    else:
-        tax = (ex_salary-80000) * 0.45 + 3000*0.03 + 9000*0.1 + 13000*0.2 + 10000*0.25 + 20000*0.35 + 25000 * 0.45
-    print('{:.2f}'.format(tax))
-except:
-    print("Parameter Error")
+def salary_after_tax(salary):
+    tax = 0
+    try:
+        salary  = int(salary) - 5000 - int(salary)*(0.08 + 0.02 + 0.005 + 0.06)
+        if salary <= 3000:
+            tax = salary * 0.03
+        elif salary <= 12000:
+            tax = salary * 0.1 -210
+        elif salary <= 25000:
+            tax = salary * 0.2 -1410
+        elif salary <= 35000:
+            tax = salary * 0.25 - 2660
+        elif salary <= 55000:
+            tax = salary * 0.3 - 4410
+        elif salary <= 80000:
+            tax = salary * 0.35 - 7160
+        else:
+            tax = salary * 0.45 - 15160
+    except:
+        print("Parameter Error")
+    return salary - tax + 5000
+
+for arg in sys.argv[1:]:
+    items = arg.split(':')
+    print('{}:{:.2f}'.format(items[0],salary_after_tax(items[1])))
