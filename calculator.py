@@ -5,7 +5,9 @@ def salary_after_tax(salary):
     tax = 0
     try:
         salary  = int(salary) - 5000 - int(salary)*(0.08 + 0.02 + 0.005 + 0.06)
-        if salary <= 3000:
+        if salary < 0:
+            tax = 0
+        elif salary <= 3000:
             tax = salary * 0.03
         elif salary <= 12000:
             tax = salary * 0.1 -210
