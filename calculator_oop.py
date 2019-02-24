@@ -57,25 +57,28 @@ class UserData:
 def salary_after_tax(salary):
     tax = 0
     try:
-        if salary < 0:
+        if salary - 5000  < 0:
             tax = 0
-        elif salary <= 3000:
-            tax = salary * 0.03
-        elif salary <= 12000:
-            tax = salary * 0.1 -210
-        elif salary <= 25000:
-            tax = salary * 0.2 -1410
-        elif salary <= 35000:
-            tax = salary * 0.25 - 2660
-        elif salary <= 55000:
-            tax = salary * 0.3 - 4410
-        elif salary <= 80000:
-            tax = salary * 0.35 - 7160
+        elif (salary - 5000) <= 3000:
+            tax = (salary-5000) * 0.03
+        elif salary - 5000 <= 12000:
+            tax = (salary-5000) * 0.1 -210
+        elif salary - 5000 <= 25000:
+            tax = (salary-5000) * 0.2 -1410
+        elif salary - 5000 <= 35000:
+            tax = (salary-5000) * 0.25 - 2660
+        elif salary -5000 <= 55000:
+            tax = (salary-5000) * 0.3 - 4410
+        elif salary -5000 <= 80000:
+            tax = (salary-5000) * 0.35 - 7160
         else:
-            tax = salary * 0.45 - 15160
+            tax = (salary-5000) * 0.45 - 15160
     except:
         print("Parameter Error")
-    return int(salary) - float(tax)
+    salary_new = float(salary) - float(tax)
+    print ('salary_new-origin:{}'.format(salary_new))
+
+    return salary_new
 
 if __name__ == '__main__':
     config_file = sys.argv[sys.argv.index('-c') + 1]
