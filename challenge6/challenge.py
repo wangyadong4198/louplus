@@ -46,6 +46,7 @@ def split():
     for year in years:
         print('year.....:{}'.format(year))
         wb2 = Workbook()
+        wb2.remove(wb2.active)
         ws = wb2.create_sheet(title = '{}'.format(year))
         ws.cell(column=1,row=1,value=cells['A1'].value)
         ws.cell(column=2,row=1,value=cells['B1'].value)
@@ -54,14 +55,15 @@ def split():
         row = 2
         for i in range(2,486):
             if cells['A{}'.format(i)].value.year == year:
-                print(cells['A{}'.format(i)].value)
+               # print(cells['A{}'.format(i)].value)
                 ws.cell(column=1,row=row,value=cells['A{}'.format(i)].value)
                 ws.cell(column=2,row=row,value=cells['B{}'.format(i)].value)
                 ws.cell(column=3,row=row,value=cells['C{}'.format(i)].value)
                 ws.cell(column=4,row=row,value=cells['D{}'.format(i)].value)
                 row += 1
         wb2.save(filename='{}.xlsx'.format(year))
-
+    
+    
 if __name__ == '__main__':
     combine()
     split()
